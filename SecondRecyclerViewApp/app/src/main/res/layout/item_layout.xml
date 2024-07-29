@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:background="@drawable/card_view_border"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="2dp"
+    app:cardPreventCornerOverlap="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <!-- res/layout/example_activity.xml -->
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/food_burger"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="18dp"
+            />
+
+        <ImageView
+        android:id="@+id/foodImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/food_burger"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/incrementButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="0dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/utility_plus_logo"
+            app:layout_constraintEnd_toStartOf="@+id/foodQuantity"
+            tools:layout_editor_absoluteY="40dp" />
+
+        <TextView
+            android:id="@+id/foodQuantity"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:scaleType="centerInside"
+            android:text="FoodQuantity"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/decrementButton"
+            tools:layout_editor_absoluteY="40dp" />
+
+        <ImageButton
+            android:id="@+id/decrementButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginRight="20dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/utility_minus_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="40dp" />
+
+        <TextView
+            android:id="@+id/foodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="FoodName"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/foodImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
