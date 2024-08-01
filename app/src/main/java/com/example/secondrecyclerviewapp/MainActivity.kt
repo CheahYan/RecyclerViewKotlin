@@ -10,6 +10,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.secondrecyclerviewapp.databinding.ActivityMainBinding
@@ -35,8 +37,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
-        activityMainBinding.mainRecyclerview.adapter = MainAdapter(foodList)
+        activityMainBinding.mainRecyclerview.adapter = MainAdapter(foodList, supportFragmentManager)
 
         activityMainBinding.mainRecyclerview.layoutManager = LinearLayoutManager(this)
         var switch_flag = true
@@ -45,16 +46,14 @@ class MainActivity : AppCompatActivity() {
                 activityMainBinding.mainRecyclerview.layoutManager = GridLayoutManager(this, 2)
                 activityMainBinding.oneTwoItemsSwitch.text = "Two Items Per Row"
                 
-                itemLayoutBinding.foodImage.layoutParams.width = 75
-                itemLayoutBinding.foodImage.layoutParams.height = 75
+                replaceFragment(switch_flag)
 
                 switch_flag = !switch_flag
             } else {
                 activityMainBinding.mainRecyclerview.layoutManager = LinearLayoutManager(this)
                 activityMainBinding.oneTwoItemsSwitch.text = "One Item Per Row"
 
-                itemLayoutBinding.foodImage.layoutParams.width = 100
-                itemLayoutBinding.foodImage.layoutParams.height = 100
+                replaceFragment(switch_flag)
 
                 switch_flag = !switch_flag
             }
@@ -94,6 +93,19 @@ class MainActivity : AppCompatActivity() {
             val goCheckoutIntent = Intent(this, CheckoutActivity::class.java)
             goCheckoutIntent.putExtra("checkout_food_list", foodList)
             startActivity(goCheckoutIntent)
+        }
+    }
+
+    private fun replaceFragment(isCurrentlyOne: Boolean) {
+
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        if (isCurrentlyOne) {
+            fragmentTransaction.replace(R.id.foodImageFragmentContainer, SecondFragment())
+            fragmentTransaction.commit()
+        } else {
+            fragmentTransaction.replace(R.id.foodImageFragmentContainer, FirstFragment())
+            fragmentTransaction.commit()
         }
     }
 }

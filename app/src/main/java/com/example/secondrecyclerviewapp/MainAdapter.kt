@@ -7,14 +7,17 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentContainerView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
-
-
+class MainAdapter (
+    var FoodList : ArrayList<Model>,
+    var fragmentManager: FragmentManager
+) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
-        var image = itemView.findViewById<ImageView>(R.id.foodImage)
+        var fragmentContainerView: FragmentContainerView = itemView.findViewById<FragmentContainerView>(R.id.foodImageFragmentContainer)
         var foodName = itemView.findViewById<TextView>(R.id.foodName)
         var foodQuantity = itemView.findViewById<TextView>(R.id.foodQuantity)
 
@@ -33,7 +36,8 @@ class MainAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<MainA
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = FoodList[position]
-        holder.image.setImageResource(item.foodImage)
+
+
         holder.foodName.text = item.foodTitle
         holder.foodQuantity.text = item.quantity.toString()
 
