@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 
 class MainAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
-
+    private var imageWidthOrHeight: Int = 400
 
     class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         var image = itemView.findViewById<ImageView>(R.id.foodImage)
@@ -37,6 +38,11 @@ class MainAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<MainA
         holder.foodName.text = item.foodTitle
         holder.foodQuantity.text = item.quantity.toString()
 
+        val layoutParams = holder.image.layoutParams
+        layoutParams.width = imageWidthOrHeight
+        layoutParams.height = imageWidthOrHeight
+        holder.image.layoutParams = layoutParams
+
         var counter:Int = item.quantity
 
         holder.incrementButton.setOnClickListener {
@@ -56,4 +62,11 @@ class MainAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<MainA
             }
         }
     }
+
+
+    fun updateImageWidthAndHeight(newWidthAndHeight: Int) {
+        this.imageWidthOrHeight = newWidthAndHeight
+        notifyDataSetChanged() // Refresh all items in the RecyclerView
+    }
+
 }

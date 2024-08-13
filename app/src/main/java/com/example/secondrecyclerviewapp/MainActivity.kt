@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var itemLayoutBinding: ItemLayoutBinding
+    private lateinit var adapter: MainAdapter
     private val foodList = ArrayList<Model>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,28 +36,28 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        adapter = MainAdapter(foodList)
+        activityMainBinding.mainRecyclerview.adapter = adapter
 
-        activityMainBinding.mainRecyclerview.adapter = MainAdapter(foodList)
 
         activityMainBinding.mainRecyclerview.layoutManager = LinearLayoutManager(this)
-        var switch_flag = true
+        var isBigImage = true
         activityMainBinding.oneTwoItemsSwitch.setOnClickListener {
-            if (switch_flag) {
+            if (isBigImage) {
                 activityMainBinding.mainRecyclerview.layoutManager = GridLayoutManager(this, 2)
                 activityMainBinding.oneTwoItemsSwitch.text = "Two Items Per Row"
-                
-                itemLayoutBinding.foodImage.layoutParams.width = 75
-                itemLayoutBinding.foodImage.layoutParams.height = 75
 
-                switch_flag = !switch_flag
+
+                adapter.updateImageWidthAndHeight(200)
+
+                isBigImage = !isBigImage
             } else {
                 activityMainBinding.mainRecyclerview.layoutManager = LinearLayoutManager(this)
                 activityMainBinding.oneTwoItemsSwitch.text = "One Item Per Row"
 
-                itemLayoutBinding.foodImage.layoutParams.width = 100
-                itemLayoutBinding.foodImage.layoutParams.height = 100
+                adapter.updateImageWidthAndHeight(400)
 
-                switch_flag = !switch_flag
+                isBigImage = !isBigImage
             }
         }
 
