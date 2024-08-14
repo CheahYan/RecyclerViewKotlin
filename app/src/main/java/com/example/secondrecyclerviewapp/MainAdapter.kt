@@ -18,6 +18,7 @@ class MainAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<MainA
         var image = itemView.findViewById<ImageView>(R.id.foodImage)
         var foodName = itemView.findViewById<TextView>(R.id.foodName)
         var foodQuantity = itemView.findViewById<TextView>(R.id.foodQuantity)
+        var foodPrice = itemView.findViewById<TextView>(R.id.foodPrice)
 
         var incrementButton = itemView.findViewById<ImageButton>(R.id.incrementButton)
         var decrementButton = itemView.findViewById<ImageButton>(R.id.decrementButton)
@@ -37,6 +38,7 @@ class MainAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<MainA
         holder.image.setImageResource(item.foodImage)
         holder.foodName.text = item.foodTitle
         holder.foodQuantity.text = item.quantity.toString()
+        holder.foodPrice.text = "$" + "%.2f".format(item.price)
 
         val layoutParams = holder.image.layoutParams
         layoutParams.width = imageWidthOrHeight
