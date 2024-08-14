@@ -28,8 +28,24 @@ class CheckoutAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<C
 
     override fun onBindViewHolder(holder: CheckoutAdapter.ViewHolder, position: Int) {
         val item = FoodList[position]
-        holder.foodName.text = item.foodTitle
-        holder.foodQuantity.text = item.quantity.toString()
-        holder.foodPrice.text = "$" + "%.2f".format(item.price)
+
+        if (item.quantity == 0) {
+            holder.itemView.visibility = View.GONE
+            holder.itemView.layoutParams =
+                RecyclerView.LayoutParams(
+                    0,0
+                )
+        } else {
+            holder.itemView.visibility = View.VISIBLE
+            holder.itemView.layoutParams =
+                RecyclerView.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+
+            holder.foodName.text = item.foodTitle
+            holder.foodQuantity.text = item.quantity.toString()
+            holder.foodPrice.text = "$" + "%.2f".format(item.price)
+        }
     }
 }
