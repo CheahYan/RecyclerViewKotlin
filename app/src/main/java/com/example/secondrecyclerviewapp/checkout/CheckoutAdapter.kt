@@ -13,6 +13,7 @@ class CheckoutAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<C
     class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         var foodName = itemView.findViewById<TextView>(R.id.checkoutFoodName)
         var foodQuantity = itemView.findViewById<TextView>(R.id.checkoutFoodQuantity)
+        var foodPrice = itemView.findViewById<TextView>(R.id.checkoutFoodPrice)
 
     }
 
@@ -29,5 +30,6 @@ class CheckoutAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<C
         val item = FoodList[position]
         holder.foodName.text = item.foodTitle
         holder.foodQuantity.text = item.quantity.toString()
+        holder.foodPrice.text = "$" + "%.2f".format(item.price)
     }
 }

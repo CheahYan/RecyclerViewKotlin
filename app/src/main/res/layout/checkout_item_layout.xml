@@ -26,7 +26,7 @@
 
             <TextView
                 android:id="@+id/checkoutFoodName"
-                android:layout_width="250dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="FoodName"
                 android:textSize="20sp"
@@ -35,12 +35,23 @@
 
             <TextView
                 android:id="@+id/checkoutFoodQuantity"
-                android:layout_width="50dp"
+                android:layout_width="70dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:scaleType="centerInside"
                 android:layout_marginLeft="10dp"
                 android:text="FoodQuantity"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/checkoutFoodPrice"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:scaleType="centerInside"
+                android:layout_marginLeft="10dp"
+                android:text="FoodPrice"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
