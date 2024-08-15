@@ -82,7 +82,7 @@
             android:text="Next Purchase"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subtotalLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/totalLabel" />
 
         <TextView
             android:id="@+id/subtotalLabel"
@@ -91,7 +91,7 @@
             android:text="Subtotal"
             android:layout_marginStart="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ServiceChargeLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/checkout_recyclerview" />
 
         <TextView
             android:id="@+id/subtotalAmount"
@@ -100,7 +100,7 @@
             android:text="Subtotal amount"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/serviceChargeAmount" />
+            app:layout_constraintTop_toBottomOf="@+id/checkout_recyclerview" />
 
         <TextView
             android:id="@+id/ServiceChargeLabel"
@@ -109,7 +109,7 @@
             android:text="Service Charge"
             android:layout_marginStart="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/GSTLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/subtotalLabel" />
 
         <TextView
             android:id="@+id/serviceChargeAmount"
@@ -118,7 +118,7 @@
             android:text="Service Charge amount"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/GSTAmount" />
+            app:layout_constraintTop_toBottomOf="@+id/subtotalAmount" />
 
         <TextView
             android:id="@+id/GSTLabel"
@@ -127,7 +127,7 @@
             android:text="GST"
             android:layout_marginStart="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/totalLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/ServiceChargeLabel" />
 
         <TextView
             android:id="@+id/GSTAmount"
@@ -136,7 +136,7 @@
             android:text="GST amount"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/totalAmount" />
+            app:layout_constraintTop_toBottomOf="@+id/serviceChargeAmount" />
 
         <TextView
             android:id="@+id/totalLabel"
@@ -145,7 +145,7 @@
             android:text="Total"
             android:layout_marginStart="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkout_recyclerview" />
+            app:layout_constraintTop_toBottomOf="@+id/GSTLabel" />
 
         <TextView
             android:id="@+id/totalAmount"
@@ -154,7 +154,7 @@
             android:text="Total amount"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkout_recyclerview" />
+            app:layout_constraintTop_toBottomOf="@+id/GSTAmount" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

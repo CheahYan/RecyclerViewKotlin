@@ -60,7 +60,7 @@ class CheckoutActivity : AppCompatActivity() {
 
     fun calculateGST(subtotal: Double): Double {
         return subtotal * GST_RATE
-    }r
+    }
 
     fun calculateTotal(subtotal: Double, serviceCharge: Double, gst: Double): Double {
         return subtotal + serviceCharge + gst
