@@ -45,7 +45,8 @@ class CheckoutAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<C
 
             holder.foodName.text = item.foodTitle
             holder.foodQuantity.text = item.quantity.toString()
-            holder.foodPrice.text = "$" + "%.2f".format(item.price)
+            val price = item.price * item.quantity
+            holder.foodPrice.text = "$" + "%.2f".format(price)
         }
     }
 }

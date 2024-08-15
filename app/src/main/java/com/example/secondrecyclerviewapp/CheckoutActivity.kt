@@ -10,6 +10,8 @@ import com.example.secondrecyclerviewapp.databinding.ActivityCheckoutOnePerRowBi
 class CheckoutActivity : AppCompatActivity() {
 
     private lateinit var activityCheckoutOnePerRowBinding: ActivityCheckoutOnePerRowBinding
+    private val SERVICE_CHARGE_RATE = 0.10
+    private val GST_RATE = 0.08
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +24,18 @@ class CheckoutActivity : AppCompatActivity() {
         activityCheckoutOnePerRowBinding.checkoutRecyclerview.adapter = CheckoutAdapter(foodList)
         activityCheckoutOnePerRowBinding.checkoutRecyclerview.layoutManager = LinearLayoutManager(this)
 
+        val subtotal = calculateSubtotal(foodList)
+        activityCheckoutOnePerRowBinding.subtotalAmount.text = "$" + "%.2f".format(subtotal)
 
+        val serviceCharge = calculateServiceCharge(subtotal)
+        activityCheckoutOnePerRowBinding.serviceChargeAmount.text = "$" + "%.2f".format(serviceCharge)
+
+        val goodsAndServiceTax = calculateGST(subtotal)
+        activityCheckoutOnePerRowBinding.GSTAmount.text = "$" + "%.2f".format(goodsAndServiceTax)
+
+
+        val total = calculateTotal(subtotal, goodsAndServiceTax, serviceCharge)
+        activityCheckoutOnePerRowBinding.totalAmount.text = "$" + "%.2f".format(total)
 
         activityCheckoutOnePerRowBinding.newPurchaseButton.setOnClickListener {
             val newPurchaseIntent = Intent(this, MainActivity::class.java)
@@ -30,5 +43,26 @@ class CheckoutActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    fun calculateSubtotal(foodList : ArrayList<Model>): Double {
+        var result = 0.00
+        for (food in foodList) {
+            result = result + (food.price * food.quantity)
+        }
+
+        return result
+    }
+
+    fun calculateServiceCharge(subtotal: Double): Double {
+        return subtotal * SERVICE_CHARGE_RATE
+    }
+
+    fun calculateGST(subtotal: Double): Double {
+        return subtotal * GST_RATE
+    }
+
+    fun calculateTotal(subtotal: Double, serviceCharge: Double, gst: Double): Double {
+        return subtotal + serviceCharge + gst
     }
 }
