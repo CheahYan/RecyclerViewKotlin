@@ -1,11 +1,8 @@
 package com.example.secondrecyclerviewapp
 
-import android.content.ClipData.Item
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -96,5 +93,13 @@ class MainActivity : AppCompatActivity() {
             goCheckoutIntent.putExtra("checkout_food_list", foodList)
             startActivity(goCheckoutIntent)
         }
+
+
+        activityMainBinding.testButton.setOnClickListener {
+            //implicit intent to open the dialler with a number
+            val intent = Intent("android.intent.action.NETSPOS")
+            startActivity(intent)
+        }
+
     }
 }
