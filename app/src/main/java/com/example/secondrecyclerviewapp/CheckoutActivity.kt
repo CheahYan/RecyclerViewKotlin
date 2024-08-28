@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.secondrecyclerviewapp.Objects.Model
 import com.example.secondrecyclerviewapp.checkout.CheckoutAdapter
 import com.example.secondrecyclerviewapp.databinding.ActivityCheckoutOnePerRowBinding
 

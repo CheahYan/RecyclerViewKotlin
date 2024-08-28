@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.secondrecyclerviewapp.Model
+import com.example.secondrecyclerviewapp.Objects.Model
 import com.example.secondrecyclerviewapp.R
 
 class CheckoutAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<CheckoutAdapter.ViewHolder>() {

@@ -1,7 +1,6 @@
 package com.example.secondrecyclerviewapp
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +8,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.secondrecyclerviewapp.Objects.Model
 import com.example.secondrecyclerviewapp.databinding.ActivityMainBinding
 import com.example.secondrecyclerviewapp.databinding.ItemLayoutBinding
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +20,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var itemLayoutBinding: ItemLayoutBinding
     private lateinit var adapter: MainAdapter
     private val foodList = ArrayList<Model>()
+
+    private var retrofit: Retrofit = Retrofit.Builder()
+    .baseUrl(BASE_URL)
+    .addConverterFactory(GsonConverterFactory.create())
+    .build();
+
+    ApiService apiService = retrofit.create(ApiService.class);
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,8 +87,10 @@ class MainActivity : AppCompatActivity() {
         foodList.add(Model(R.drawable.food_watermelon, "Watermelon", 0, 5.60))
         foodList.add(Model(R.drawable.food_grilled_duck_drumstick, "Grilled Duck Drumstick", 0, 2.80))
         foodList.add(Model(R.drawable.food_ham_and_cheese_sandwich, "Ham And Cheese Sandwich", 0, 2.30))
-        foodList.add(Model(R.drawable.food_honey_garlic_prawns_with_broccoli_and_rice, "Honey Garlic Prawns" +
-                " With Broccoli And Rice", 0, 12.80))
+        foodList.add(
+            Model(R.drawable.food_honey_garlic_prawns_with_broccoli_and_rice, "Honey Garlic Prawns" +
+                " With Broccoli And Rice", 0, 12.80)
+        )
         foodList.add(Model(R.drawable.food_jollibee_fried_chicken_sandwich, "Jollibee Fried Chicken Sandwich", 0, 6.75))
         foodList.add(Model(R.drawable.food_lasagna, "Lasagna", 0, 12.10))
         foodList.add(Model(R.drawable.food_macaroni, "Macaroni", 0, 6.40))
