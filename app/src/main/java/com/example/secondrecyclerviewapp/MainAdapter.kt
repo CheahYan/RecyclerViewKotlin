@@ -7,9 +7,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.secondrecyclerviewapp.Objects.Model
+import com.example.secondrecyclerviewapp.Objects.Item
 
-class MainAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class MainAdapter (var FoodList : ArrayList<Item>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     private var imageWidthOrHeight: Int = 400
 
@@ -34,8 +34,8 @@ class MainAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<MainA
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = FoodList[position]
-        holder.image.setImageResource(item.foodImage)
-        holder.foodName.text = item.foodTitle
+        holder.image.setImageResource(item.image)
+        holder.foodName.text = item.name
         holder.foodQuantity.text = item.quantity.toString()
         holder.foodPrice.text = "$" + "%.2f".format(item.price)
 

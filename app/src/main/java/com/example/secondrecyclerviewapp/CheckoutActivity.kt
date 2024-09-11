@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.secondrecyclerviewapp.Objects.Model
+import com.example.secondrecyclerviewapp.Objects.Item
 import com.example.secondrecyclerviewapp.checkout.CheckoutAdapter
 import com.example.secondrecyclerviewapp.databinding.ActivityCheckoutOnePerRowBinding
 
@@ -17,7 +17,7 @@ class CheckoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val foodList = intent.getSerializableExtra("checkout_food_list") as ArrayList<Model>
+        val foodList = intent.getSerializableExtra("checkout_food_list") as ArrayList<Item>
 
         activityCheckoutOnePerRowBinding = ActivityCheckoutOnePerRowBinding.inflate(layoutInflater)
         setContentView(activityCheckoutOnePerRowBinding.root)
@@ -46,7 +46,7 @@ class CheckoutActivity : AppCompatActivity() {
 
     }
 
-    fun calculateSubtotal(foodList : ArrayList<Model>): Double {
+    fun calculateSubtotal(foodList : ArrayList<Item>): Double {
         var result = 0.00
         for (food in foodList) {
             result = result + (food.price * food.quantity)

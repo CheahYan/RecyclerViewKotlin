@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.secondrecyclerviewapp.Objects.Model
+import com.example.secondrecyclerviewapp.Objects.Item
 import com.example.secondrecyclerviewapp.R
 
-class CheckoutAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<CheckoutAdapter.ViewHolder>() {
+class CheckoutAdapter (var FoodList : ArrayList<Item>) : RecyclerView.Adapter<CheckoutAdapter.ViewHolder>() {
 
     class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         var foodName = itemView.findViewById<TextView>(R.id.checkoutFoodName)
@@ -43,7 +43,7 @@ class CheckoutAdapter (var FoodList : ArrayList<Model>) : RecyclerView.Adapter<C
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 )
 
-            holder.foodName.text = item.foodTitle
+            holder.foodName.text = item.name
             holder.foodQuantity.text = item.quantity.toString()
             val price = item.price * item.quantity
             holder.foodPrice.text = "$" + "%.2f".format(price)

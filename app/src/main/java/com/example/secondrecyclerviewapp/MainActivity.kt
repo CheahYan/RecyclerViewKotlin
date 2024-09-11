@@ -8,9 +8,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.secondrecyclerviewapp.Objects.Model
+import com.example.secondrecyclerviewapp.Objects.Item
+import com.example.secondrecyclerviewapp.Objects.Vendor
 import com.example.secondrecyclerviewapp.databinding.ActivityMainBinding
 import com.example.secondrecyclerviewapp.databinding.ItemLayoutBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -19,16 +23,42 @@ class MainActivity : AppCompatActivity() {
     private lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var itemLayoutBinding: ItemLayoutBinding
     private lateinit var adapter: MainAdapter
-    private val foodList = ArrayList<Model>()
+    private val foodList = ArrayList<Item>()
+
+    private val BASE_URL = "http://10.0.2.2:3333/netsPOS"
 
     private var retrofit: Retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .addConverterFactory(GsonConverterFactory.create())
-    .build();
+    .build()
+    .create(ApiService::class.java)
 
-    ApiService apiService = retrofit.create(ApiService.class);
+    private val apiService: ApiService = retrofit.create(ApiService::class.java)
 
+    private fun getVendor() {
+        val api = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiService::class.java)
 
+        api.getVendor().enqueue
+    }
+
+    val call: Call<Vendor> = apiService.getVendor(1)
+    call.enqueue(object: Callback<Vendor> {
+        override fun onResponse(call: Call<Vendor>, response: Response<Vendor>) {
+            if (response.isSuccessful() && response.body() != null) {
+                val vendor: Vendor = response.body()!!
+                // Handle the post data
+            }
+        }
+
+        @Override
+        override fun onFailure(call: Call<Vendor>,  t: Throwable) {
+            // Handle the failure
+        }
+    });
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,36 +100,36 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        foodList.add(Model(R.drawable.food_apple_pie, "Apple Pie", 0, 2.40))
-        foodList.add(Model(R.drawable.food_avocados, "Avocados", 0, 1.11))
-        foodList.add(Model(R.drawable.food_burger, "Burger", 0, 6.59))
-        foodList.add(Model(R.drawable.food_chicken_tenders, "Chicken Tenders", 0, 1.80))
-        foodList.add(Model(R.drawable.food_fish_and_chips, "Fish And Chips", 0, 11.80))
-        foodList.add(Model(R.drawable.food_deep_dish_pizza, "Deep Dish Pizza", 0, 25.99))
-        foodList.add(Model(R.drawable.food_escargot, "Escargot", 0, 0.50))
-        foodList.add(Model(R.drawable.food_fried_chicken, "Fried Chicken", 0, 2.50))
-        foodList.add(Model(R.drawable.food_grilled_cheese_toast, "Grill Cheese Toast", 0, 1.60))
-        foodList.add(Model(R.drawable.food_mapo_tofu, "Mapo Tofu", 0, 8.40))
-        foodList.add(Model(R.drawable.food_pancakes, "Pancake", 0, 2.30))
-        foodList.add(Model(R.drawable.food_ramen, "Ramen", 0, 7.50))
-        foodList.add(Model(R.drawable.food_rigatoni_pasta, "Rigatoni Pasta", 0, 8.90))
-        foodList.add(Model(R.drawable.food_waffles, "Waffles", 0, 1.80))
-        foodList.add(Model(R.drawable.food_watermelon, "Watermelon", 0, 5.60))
-        foodList.add(Model(R.drawable.food_grilled_duck_drumstick, "Grilled Duck Drumstick", 0, 2.80))
-        foodList.add(Model(R.drawable.food_ham_and_cheese_sandwich, "Ham And Cheese Sandwich", 0, 2.30))
+        foodList.add(Item(R.drawable.food_apple_pie, "Apple Pie", 0, 2.40))
+        foodList.add(Item(R.drawable.food_avocados, "Avocados", 0, 1.11))
+        foodList.add(Item(R.drawable.food_burger, "Burger", 0, 6.59))
+        foodList.add(Item(R.drawable.food_chicken_tenders, "Chicken Tenders", 0, 1.80))
+        foodList.add(Item(R.drawable.food_fish_and_chips, "Fish And Chips", 0, 11.80))
+        foodList.add(Item(R.drawable.food_deep_dish_pizza, "Deep Dish Pizza", 0, 25.99))
+        foodList.add(Item(R.drawable.food_escargot, "Escargot", 0, 0.50))
+        foodList.add(Item(R.drawable.food_fried_chicken, "Fried Chicken", 0, 2.50))
+        foodList.add(Item(R.drawable.food_grilled_cheese_toast, "Grill Cheese Toast", 0, 1.60))
+        foodList.add(Item(R.drawable.food_mapo_tofu, "Mapo Tofu", 0, 8.40))
+        foodList.add(Item(R.drawable.food_pancakes, "Pancake", 0, 2.30))
+        foodList.add(Item(R.drawable.food_ramen, "Ramen", 0, 7.50))
+        foodList.add(Item(R.drawable.food_rigatoni_pasta, "Rigatoni Pasta", 0, 8.90))
+        foodList.add(Item(R.drawable.food_waffles, "Waffles", 0, 1.80))
+        foodList.add(Item(R.drawable.food_watermelon, "Watermelon", 0, 5.60))
+        foodList.add(Item(R.drawable.food_grilled_duck_drumstick, "Grilled Duck Drumstick", 0, 2.80))
+        foodList.add(Item(R.drawable.food_ham_and_cheese_sandwich, "Ham And Cheese Sandwich", 0, 2.30))
         foodList.add(
-            Model(R.drawable.food_honey_garlic_prawns_with_broccoli_and_rice, "Honey Garlic Prawns" +
+            Item(R.drawable.food_honey_garlic_prawns_with_broccoli_and_rice, "Honey Garlic Prawns" +
                 " With Broccoli And Rice", 0, 12.80)
         )
-        foodList.add(Model(R.drawable.food_jollibee_fried_chicken_sandwich, "Jollibee Fried Chicken Sandwich", 0, 6.75))
-        foodList.add(Model(R.drawable.food_lasagna, "Lasagna", 0, 12.10))
-        foodList.add(Model(R.drawable.food_macaroni, "Macaroni", 0, 6.40))
-        foodList.add(Model(R.drawable.food_masala_thosai, "Masala Thosai", 0, 2.80))
-        foodList.add(Model(R.drawable.food_pizza, "Pizza", 0, 32.90))
-        foodList.add(Model(R.drawable.food_potato_chips, "Potato Chips", 0, 0.90))
-        foodList.add(Model(R.drawable.food_strawberry, "Strawberry", 0, 0.23))
-        foodList.add(Model(R.drawable.food_strawberry_milk, "Strawberry Milk", 0, 1.20))
-        foodList.add(Model(R.drawable.food_strawberry_shortcake, "Strawberry Shortcake", 0, 2.50))
+        foodList.add(Item(R.drawable.food_jollibee_fried_chicken_sandwich, "Jollibee Fried Chicken Sandwich", 0, 6.75))
+        foodList.add(Item(R.drawable.food_lasagna, "Lasagna", 0, 12.10))
+        foodList.add(Item(R.drawable.food_macaroni, "Macaroni", 0, 6.40))
+        foodList.add(Item(R.drawable.food_masala_thosai, "Masala Thosai", 0, 2.80))
+        foodList.add(Item(R.drawable.food_pizza, "Pizza", 0, 32.90))
+        foodList.add(Item(R.drawable.food_potato_chips, "Potato Chips", 0, 0.90))
+        foodList.add(Item(R.drawable.food_strawberry, "Strawberry", 0, 0.23))
+        foodList.add(Item(R.drawable.food_strawberry_milk, "Strawberry Milk", 0, 1.20))
+        foodList.add(Item(R.drawable.food_strawberry_shortcake, "Strawberry Shortcake", 0, 2.50))
 
         activityMainBinding.checkoutButton.setOnClickListener {
             val goCheckoutIntent = Intent(this, CheckoutActivity::class.java)

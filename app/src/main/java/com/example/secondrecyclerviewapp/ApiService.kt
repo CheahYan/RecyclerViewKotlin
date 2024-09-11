@@ -1,6 +1,6 @@
 package com.example.secondrecyclerviewapp
 
-import com.example.secondrecyclerviewapp.Objects.Model
+import com.example.secondrecyclerviewapp.Objects.Item
 import com.example.secondrecyclerviewapp.Objects.Vendor
 import retrofit2.Call
 import retrofit2.http.GET
@@ -16,6 +16,6 @@ interface ApiService {
     @GET("vendors/{id}/items")
     fun getFoodItem(
         @Path("vendorId") vendorId: Int
-    ): Call<List<Model>>
+    ): Call<List<Item>>
 
 }
