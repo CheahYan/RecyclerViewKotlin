@@ -1,8 +1,11 @@
 package com.example.secondrecyclerviewapp
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,6 +14,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.secondrecyclerviewapp.databinding.ActivityMainBinding
 import com.example.secondrecyclerviewapp.databinding.ItemLayoutBinding
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
 
@@ -100,6 +105,21 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent("android.intent.action.NETSPOS")
             startActivity(intent)
         }
+
+        // Fetch the FCM token
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("FCM_TOKEN", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get the FCM registration token
+            val token = task.result
+
+            // Log and display the token
+            Log.d("FCM_TOKEN", "FCM Registration Token: $token")
+            Toast.makeText(baseContext, "FCM Token: $token", Toast.LENGTH_SHORT).show()
+        })
 
     }
 }
