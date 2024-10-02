@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "50813474659",
+    "project_id": "nets-pos-91b59",
+    "storage_bucket": "nets-pos-91b59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50813474659:android:0ed0cfa2438e298c636556",
+        "android_client_info": {
+          "package_name": "com.example.secondrecyclerviewapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPGs1wNMnjyNJ8P6B788iTCISAVvrb5sE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

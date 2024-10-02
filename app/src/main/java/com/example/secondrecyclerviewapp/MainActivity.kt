@@ -1,10 +1,23 @@
 package com.example.secondrecyclerviewapp
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -74,11 +87,36 @@ class MainActivity : AppCompatActivity() {
         foodList.add(Model(R.drawable.food_rigatoni_pasta, "Rigatoni Pasta", 0, 8.90))
         foodList.add(Model(R.drawable.food_waffles, "Waffles", 0, 1.80))
         foodList.add(Model(R.drawable.food_watermelon, "Watermelon", 0, 5.60))
-        foodList.add(Model(R.drawable.food_grilled_duck_drumstick, "Grilled Duck Drumstick", 0, 2.80))
-        foodList.add(Model(R.drawable.food_ham_and_cheese_sandwich, "Ham And Cheese Sandwich", 0, 2.30))
-        foodList.add(Model(R.drawable.food_honey_garlic_prawns_with_broccoli_and_rice, "Honey Garlic Prawns" +
-                " With Broccoli And Rice", 0, 12.80))
-        foodList.add(Model(R.drawable.food_jollibee_fried_chicken_sandwich, "Jollibee Fried Chicken Sandwich", 0, 6.75))
+        foodList.add(
+            Model(
+                R.drawable.food_grilled_duck_drumstick,
+                "Grilled Duck Drumstick",
+                0,
+                2.80
+            )
+        )
+        foodList.add(
+            Model(
+                R.drawable.food_ham_and_cheese_sandwich,
+                "Ham And Cheese Sandwich",
+                0,
+                2.30
+            )
+        )
+        foodList.add(
+            Model(
+                R.drawable.food_honey_garlic_prawns_with_broccoli_and_rice, "Honey Garlic Prawns" +
+                        " With Broccoli And Rice", 0, 12.80
+            )
+        )
+        foodList.add(
+            Model(
+                R.drawable.food_jollibee_fried_chicken_sandwich,
+                "Jollibee Fried Chicken Sandwich",
+                0,
+                6.75
+            )
+        )
         foodList.add(Model(R.drawable.food_lasagna, "Lasagna", 0, 12.10))
         foodList.add(Model(R.drawable.food_macaroni, "Macaroni", 0, 6.40))
         foodList.add(Model(R.drawable.food_masala_thosai, "Masala Thosai", 0, 2.80))
@@ -88,18 +126,17 @@ class MainActivity : AppCompatActivity() {
         foodList.add(Model(R.drawable.food_strawberry_milk, "Strawberry Milk", 0, 1.20))
         foodList.add(Model(R.drawable.food_strawberry_shortcake, "Strawberry Shortcake", 0, 2.50))
 
-        activityMainBinding.checkoutButton.setOnClickListener {
-            val goCheckoutIntent = Intent(this, CheckoutActivity::class.java)
-            goCheckoutIntent.putExtra("checkout_food_list", foodList)
-            startActivity(goCheckoutIntent)
-        }
-
-
-        activityMainBinding.testButton.setOnClickListener {
-            //implicit intent to open the dialler with a number
-            val intent = Intent("android.intent.action.NETSPOS")
-            startActivity(intent)
-        }
-
+    activityMainBinding.checkoutButton.setOnClickListener {
+        val goCheckoutIntent = Intent(this, CheckoutActivity::class.java)
+        goCheckoutIntent.putExtra("checkout_food_list", foodList)
+        startActivity(goCheckoutIntent)
     }
+
+
+    activityMainBinding.testButton.setOnClickListener {
+        //implicit intent to open the dialler with a number
+        val intent = Intent("android.intent.action.NETSPOS")
+        startActivity(intent)
+    }
+        }
 }
