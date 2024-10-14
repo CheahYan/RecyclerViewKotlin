@@ -15,9 +15,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.secondrecyclerviewapp.databinding.ActivityMainBinding
 import com.example.secondrecyclerviewapp.databinding.ItemLayoutBinding
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.Firebase
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.analytics
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.MessagingAnalytics
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     private lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var itemLayoutBinding: ItemLayoutBinding
@@ -27,6 +33,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         itemLayoutBinding = ItemLayoutBinding.inflate(layoutInflater)
