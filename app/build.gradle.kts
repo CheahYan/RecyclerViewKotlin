@@ -3,6 +3,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -48,6 +49,11 @@ dependencies {
 
     implementation("androidx.fragment:fragment:$fragment_version")
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
+
+    implementation("com.google.firebase:firebase-messaging:23.0.0")
+
+    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+    implementation("com.google.firebase:firebase-analytics")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

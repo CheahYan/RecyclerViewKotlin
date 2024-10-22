@@ -1,8 +1,11 @@
 package com.example.secondrecyclerviewapp
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,8 +14,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.secondrecyclerviewapp.databinding.ActivityMainBinding
 import com.example.secondrecyclerviewapp.databinding.ItemLayoutBinding
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.Firebase
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.analytics
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.MessagingAnalytics
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     private lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var itemLayoutBinding: ItemLayoutBinding
@@ -22,6 +33,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+        //parameters in a custom event
+        val bundle = Bundle().apply {
+            putString("user_type", "Non-member")
+            putString("level_client", "Non-member")
+            putLong("budget", 100)
+        }
+
+        // Log a custom event
+        firebaseAnalytics.logEvent("login_by_non_member", bundle)
 
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         itemLayoutBinding = ItemLayoutBinding.inflate(layoutInflater)
@@ -100,6 +123,21 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent("android.intent.action.NETSPOS")
             startActivity(intent)
         }
+
+        // Fetch the FCM token
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("FCM_TOKEN", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get the FCM registration token
+            val token = task.result
+
+            // Log and display the token
+            Log.d("FCM_TOKEN", "FCM Registration Token: $token")
+            Toast.makeText(baseContext, "FCM Token: $token", Toast.LENGTH_SHORT).show()
+        })
 
     }
 }
