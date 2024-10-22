@@ -36,6 +36,16 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
+        //parameters in a custom event
+        val bundle = Bundle().apply {
+            putString("user_type", "Non-member")
+            putString("level_client", "Non-member")
+            putLong("budget", 100)
+        }
+
+        // Log a custom event
+        firebaseAnalytics.logEvent("login_by_non_member", bundle)
+
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         itemLayoutBinding = ItemLayoutBinding.inflate(layoutInflater)
 
