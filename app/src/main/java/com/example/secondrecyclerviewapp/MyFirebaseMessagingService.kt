@@ -18,10 +18,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
+        firebaseAnalytics.logEvent("testing_service", null)
+
         // Log the notification received event
         logNotificationReceivedEvent(remoteMessage)
 
-        handleNotificationClick(remoteMessage)
+       // handleNotificationClick(remoteMessage)
     }
 
     private fun logNotificationReceivedEvent(remoteMessage: RemoteMessage) {
